@@ -10,9 +10,9 @@ class LeaderboardApp {
     const main = document.createElement('main');
     main.classList.add('main');
 
-    const header = this.createHeader();
-    const left = this.createLeftSection();
-    const right = this.createRightSection();
+    const header = this.createHeader(); // Utilisation correcte de 'this'
+    const left = this.createLeftSection(); // Utilisation correcte de 'this'
+    const right = this.createRightSection(); // Utilisation correcte de 'this'
 
     main.appendChild(header);
     main.appendChild(left);
@@ -22,6 +22,7 @@ class LeaderboardApp {
     this.body.appendChild(main);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   createHeader() {
     const header = document.createElement('div');
     header.classList.add('header');
@@ -35,7 +36,7 @@ class LeaderboardApp {
     const left = document.createElement('div');
     left.classList.add('left');
 
-    const div1 = this.createSectionWithTitle('Recent scores');
+    const div1 = this.createSectionWithTitle('Recent scores'); // Utilisation correcte de 'this'
     const table = this.createScoreTable();
     div1.appendChild(table);
 
@@ -47,7 +48,7 @@ class LeaderboardApp {
     const right = document.createElement('div');
     right.classList.add('right');
 
-    const div2 = this.createSectionWithTitle('Add your score');
+    const div2 = this.createSectionWithTitle('Add your score'); // Utilisation correcte de 'this'
     const form = this.createScoreForm();
     div2.appendChild(form);
 
@@ -55,6 +56,7 @@ class LeaderboardApp {
     return right;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   createSectionWithTitle(titleText) {
     const div = document.createElement('div');
     div.classList.add('title');
@@ -67,9 +69,9 @@ class LeaderboardApp {
   createScoreTable() {
     const table = document.createElement('table');
     const tr = document.createElement('tr');
-    const td1 = this.createTableHeader('Libellé: 100');
-    const td2 = this.createTableHeader('Libellé: 50');
-    const td3 = this.createTableHeader('Libellé: 20');
+    const td1 = this.createTableHeader('Libellé: 100'); // Utilisation correcte de 'this'
+    const td2 = this.createTableHeader('Libellé: 50'); // Utilisation correcte de 'this'
+    const td3 = this.createTableHeader('Libellé: 20'); // Utilisation correcte de 'this'
     tr.appendChild(td1);
     tr.appendChild(td2);
     tr.appendChild(td3);
@@ -77,6 +79,7 @@ class LeaderboardApp {
     return table;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   createTableHeader(text) {
     const th = document.createElement('th');
     th.textContent = text;
@@ -85,15 +88,16 @@ class LeaderboardApp {
 
   createScoreForm() {
     const form = document.createElement('form');
-    const input1 = this.createInput('text', 'name', 'Your Name');
-    const input2 = this.createInput('text', 'score', 'Your Score');
-    const btnSubmit = this.createInput('submit', '', 'Submit');
+    const input1 = this.createInput('text', 'name', 'Your Name'); // Utilisation correcte de 'this'
+    const input2 = this.createInput('text', 'score', 'Your Score'); // Utilisation correcte de 'this'
+    const btnSubmit = this.createInput('submit', '', 'Submit'); // Utilisation correcte de 'this'
     form.appendChild(input1);
     form.appendChild(input2);
     form.appendChild(btnSubmit);
     return form;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   createInput(type, name, placeholder) {
     const input = document.createElement('input');
     input.type = type;
@@ -103,6 +107,8 @@ class LeaderboardApp {
   }
 }
 
+const app = new LeaderboardApp();
 window.addEventListener('DOMContentLoaded', () => {
-  new LeaderboardApp();
+  // Utilisation de l'instance déjà créée
+  app.launcher();
 });
