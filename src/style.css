@@ -1,4 +1,68 @@
-* {
-  margin: 0;
-  padding: 0;
+body {
+  background-color: rgba(57, 189, 17, 0.336);
+  box-sizing: border-box;
+}
+
+.main {
+  width: 1000px;
+  margin: 0 auto;
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.header {
+  flex: 100%;
+  border: 1px solid silver;
+}
+
+h1 {
+  text-align: center;
+}
+
+.left,
+.right {
+  flex: 1 40%;
+  padding: 50px;
+}
+
+.left .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.left .title button {
+  height: 40px;
+}
+
+table {
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid rgb(6, 165, 165);
+  text-align: left;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form input {
+  height: 30px;
+  font-size: 12pt;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+form input[type="submit"] {
+  width: 200px;
+}
+
+.footer {
+  background-color: rgb(133, 22, 236);
+  flex: 100%;
 }
