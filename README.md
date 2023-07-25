@@ -17,8 +17,8 @@
   - [Install](#install)
   - [Usage](#usage)
   - [Run tests](#run-tests)
+  - [Author](#author)
   - [Deployment](#triangular_flag_on_post-deployment)
-- [👥 Authors](#authors)
 - [🔭 Future Features](#future-features)
 - [🤝 Contributing](#contributing)
 - [⭐️ Show your support](#support)
@@ -83,20 +83,11 @@ To run the project, execute the following command:
 ### Run tests
 
 To run tests, run the following command:
+- npx hint .
 
+### Author
 
-### Deployment
-
-You can deploy this project using:
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## 👥 Authors <a name="authors"></a>
-
-> Mention all of the collaborators of this project.
-
-👤 **Author1**
+👤 **Author**
 
 - GitHub: [@GhostEsso](https://github.com/GhostEsso)
 - Twitter: [@TambanaEssohanam](https://twitter.com/TambanaEssohana)
@@ -141,7 +132,5 @@ I would like to thank...
 ## 📝 License <a name="license"></a>
 
 This project is [MIT](./LICENSE) licensed.
-
-_NOTE: we recommend using the [MIT license](https://choosealicense.com/licenses/mit/) - you can set it up quickly by [using templates available on GitHub](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository). You can also use [any other license](https://choosealicense.com/licenses/) if you wish._
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
