@@ -1,5 +1,7 @@
+/* style.css */
+
 body {
-  background-color: rgba(57, 189, 17, 0.336);
+  background-color: rgba(35, 223, 18, 0.432);
   box-sizing: border-box;
 }
 
@@ -13,37 +15,61 @@ body {
 
 .header {
   flex: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border: 1px solid silver;
+  padding: 10px;
 }
 
-h1 {
-  text-align: center;
+.header button {
+  height: 40px;
+  margin-right: 10px;
 }
 
 .left,
 .right {
   flex: 1 40%;
-  padding: 50px;
+  padding: 20px;
 }
 
 .left .title {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
+  margin-bottom: 10px;
 }
 
 .left .title button {
   height: 40px;
 }
 
-table {
+.scoreTable {
   width: 100%;
+  border-collapse: collapse;
+  border: 1px solid silver; /* Ajouter une bordure à la table */
 }
 
-th,
-td {
-  border: 1px solid rgb(6, 165, 165);
-  text-align: left;
+.scoreTable th,
+.scoreTable td {
+  border: 1px solid silver;
+  padding: 8px;
+  text-align: center;
+}
+
+.scoreList {
+  border: 1px solid rgb(0, 0, 0); /* Ajouter une bordure à la liste des noms */
+  padding: 10px;
+  list-style: none; /* Supprimer les puces de la liste */
+}
+
+.scoreList li {
+  margin-bottom: 5px;
+}
+
+.right .title {
+  margin-bottom: 10px;
 }
 
 form {
@@ -52,17 +78,23 @@ form {
 }
 
 form input {
-  height: 30px;
+  height: 25px;
   font-size: 12pt;
   margin-bottom: 15px;
-  border-radius: 10px;
+  border-radius: 9px;
 }
 
-form input[type="submit"] {
+form input[type='submit'] {
   width: 200px;
 }
 
+.nameList {
+  border: 2px solid rgb(0, 0, 0); /* Ajouter une bordure à la liste des noms */
+  padding: 0; /* Supprimer les marges internes de la liste pour éliminer les puces */
+  list-style: none; /* Supprimer les puces de la liste */
+}
+
 .footer {
-  background-color: rgb(133, 22, 236);
+  background-color: rgb(131, 226, 43);
   flex: 100%;
 }

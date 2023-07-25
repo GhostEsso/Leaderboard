@@ -22,13 +22,13 @@ class LeaderboardApp {
     this.body.appendChild(main);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   createHeader() {
     const header = document.createElement('div');
     header.classList.add('header');
     const h1 = document.createElement('h1');
     h1.textContent = 'Leaderboard';
     header.appendChild(h1);
+
     return header;
   }
 
@@ -36,12 +36,33 @@ class LeaderboardApp {
     const left = document.createElement('div');
     left.classList.add('left');
 
-    const div1 = this.createSectionWithTitle('Recent scores'); // Utilisation correcte de 'this'
-    const table = this.createScoreTable();
-    div1.appendChild(table);
+    const div1 = this.createSectionWithTitle('Recent scores   '); // Utilisation correcte de 'this'
+    const btnRefresh = this.createRefreshButton(); // Créer le bouton "Refresh"
+    div1.appendChild(btnRefresh); // Ajouter le bouton "Refresh" à côté de "Recent scores"
+    left.appendChild(div1); // Ajouter le titre "Recent scores" avec le bouton "Refresh"
 
-    left.appendChild(div1);
+    // Utilisez une liste pour afficher les noms sous forme de liste
+    const ul = document.createElement('ul');
+    ul.classList.add('nameList'); // Ajouter une classe pour la bordure
+    const names = ['Name: 100', 'Name: 50', 'Name: 20', 'Name: 40']; // Remplacez ces noms par vos données de score
+    names.forEach((name, index) => {
+      const li = document.createElement('li');
+      li.textContent = name;
+      li.style.backgroundColor = index % 2 === 0 ? 'white' : 'silver'; // Alterner les arrière-plans blanc et noir
+      ul.appendChild(li);
+    });
+    left.appendChild(ul); // Ajouter la liste de noms sous "Recent scores"
+
     return left;
+  }
+
+  createRefreshButton() {
+    const btnRefresh = document.createElement('button');
+    btnRefresh.textContent = 'Refresh';
+    btnRefresh.addEventListener('click', () => {
+      // Ajoutez ici la logique pour rafraîchir les scores
+    });
+    return btnRefresh;
   }
 
   createRightSection() {
@@ -56,7 +77,6 @@ class LeaderboardApp {
     return right;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   createSectionWithTitle(titleText) {
     const div = document.createElement('div');
     div.classList.add('title');
@@ -68,18 +88,14 @@ class LeaderboardApp {
 
   createScoreTable() {
     const table = document.createElement('table');
+    table.classList.add('scoreTable'); // Ajouter la classe "scoreTable" pour la bordure
     const tr = document.createElement('tr');
-    const td1 = this.createTableHeader('Libellé: 100'); // Utilisation correcte de 'this'
-    const td2 = this.createTableHeader('Libellé: 50'); // Utilisation correcte de 'this'
-    const td3 = this.createTableHeader('Libellé: 20'); // Utilisation correcte de 'this'
-    tr.appendChild(td1);
-    tr.appendChild(td2);
-    tr.appendChild(td3);
+    const th = this.createTableHeader('Name'); // Utilisation correcte de 'this'
+    tr.appendChild(th);
     table.appendChild(tr);
     return table;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   createTableHeader(text) {
     const th = document.createElement('th');
     th.textContent = text;
@@ -97,7 +113,6 @@ class LeaderboardApp {
     return form;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   createInput(type, name, placeholder) {
     const input = document.createElement('input');
     input.type = type;
