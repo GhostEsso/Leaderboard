@@ -59,8 +59,29 @@ class LeaderboardApp {
   createRefreshButton() {
     const btnRefresh = document.createElement('button');
     btnRefresh.textContent = 'Refresh';
-    btnRefresh.addEventListener('click', () => {
-      // Ajoutez ici la logique pour rafraîchir les scores
+    btnRefresh.addEventListener('click', async () => {
+      try {
+        // POST Request for creating un new game
+        const gameData = {
+          name: 'Ghost',
+        };
+
+        const response = await fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/', {
+          method: 'POST',
+          headers: {
+            'content-Type': 'application/json',
+          },
+          body: JSON.stringify(gameData),
+        });
+
+        const data = await response.json();
+
+        //save the ID of the game returned by API
+        const gameId = data.result.substring(data.result.lastIndexOf(':') + 2);
+        
+      } catch (error) {
+        console.error('Error while creating the game :', error);
+      }
     });
     return btnRefresh;
   }
