@@ -1,7 +1,7 @@
 /* style.css */
 
 body {
-  background-color: rgba(35, 223, 18, 0.432);
+  background-color: rgba(18, 216, 223, 0.432);
   box-sizing: border-box;
 }
 
@@ -89,12 +89,16 @@ form input[type='submit'] {
 }
 
 .nameList {
-  border: 2px solid rgb(0, 0, 0); /* Ajouter une bordure à la liste des noms */
+  border: 2px solid rgb(0, 0, 0);  /* Ajouter une bordure à la liste des noms
   padding: 0; /* Supprimer les marges internes de la liste pour éliminer les puces */
   list-style: none; /* Supprimer les puces de la liste */
 }
 
+.noBorder {
+  border: none;
+}
+
 .footer {
-  background-color: rgb(131, 226, 43);
+  background-color: rgba(43, 129, 96, 0.699);
   flex: 100%;
 }

@@ -10,9 +10,9 @@ class LeaderboardApp {
     const main = document.createElement('main');
     main.classList.add('main');
 
-    const header = this.createHeader(); // Utilisation correcte de 'this'
-    const left = this.createLeftSection(); // Utilisation correcte de 'this'
-    const right = this.createRightSection(); // Utilisation correcte de 'this'
+    const header = this.createHeader();
+    const left = this.createLeftSection();
+    const right = this.createRightSection();
 
     main.appendChild(header);
     main.appendChild(left);
@@ -22,6 +22,7 @@ class LeaderboardApp {
     this.body.appendChild(main);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   createHeader() {
     const header = document.createElement('div');
     header.classList.add('header');
@@ -32,35 +33,81 @@ class LeaderboardApp {
     return header;
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  async getScores(gameId) {
+    try {
+      const response = await fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores/`);
+      const data = await response.json();
+      return data.result;
+    } catch (error) {
+      return [];
+    }
+  }
+
   createLeftSection() {
     const left = document.createElement('div');
     left.classList.add('left');
 
-    const div1 = this.createSectionWithTitle('Recent scores   '); // Utilisation correcte de 'this'
-    const btnRefresh = this.createRefreshButton(); // Créer le bouton "Refresh"
-    div1.appendChild(btnRefresh); // Ajouter le bouton "Refresh" à côté de "Recent scores"
-    left.appendChild(div1); // Ajouter le titre "Recent scores" avec le bouton "Refresh"
+    const div1 = this.createSectionWithTitle('Recent scores');
+    const btnRefresh = this.createRefreshButton();
+    div1.appendChild(btnRefresh);
+    left.appendChild(div1);
 
-    // Utilisez une liste pour afficher les noms sous forme de liste
     const ul = document.createElement('ul');
-    ul.classList.add('nameList'); // Ajouter une classe pour la bordure
-    const names = ['Name: 100', 'Name: 50', 'Name: 20', 'Name: 40']; // Remplacez ces noms par vos données de score
-    names.forEach((name, index) => {
-      const li = document.createElement('li');
-      li.textContent = name;
-      li.style.backgroundColor = index % 2 === 0 ? 'white' : 'silver'; // Alterner les arrière-plans blanc et noir
-      ul.appendChild(li);
-    });
-    left.appendChild(ul); // Ajouter la liste de noms sous "Recent scores"
+    ul.classList.add('nameList');
+
+    const names = ['Name: 100', 'Name: 50', 'Name: 20', 'Name: 40'];
+
+    if (names.length > 0) {
+      names.forEach((name, index) => {
+        const li = document.createElement('li');
+        li.textContent = name;
+        li.style.backgroundColor = index % 2 === 0 ? 'white' : 'silver';
+        ul.appendChild(li);
+      });
+    } else {
+      ul.style.border = 'none';
+    }
+
+    left.appendChild(ul);
 
     return left;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  async updateScores(gameId) {
+    const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores/`;
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+
+      const ul = document.querySelector('.nameList');
+      ul.innerHTML = '';
+
+      if (data.result && data.result.length > 0) {
+        data.result.forEach((score, index) => {
+          const li = document.createElement('li');
+          li.textContent = `Name: ${score.user}, Score: ${score.score}`;
+          li.style.backgroundColor = index % 2 === 0 ? 'white' : 'silver';
+          ul.appendChild(li);
+        });
+      }
+    } catch (error) {
+      throw new Error('Failed to update scores:', error);
+    }
   }
 
   createRefreshButton() {
     const btnRefresh = document.createElement('button');
     btnRefresh.textContent = 'Refresh';
-    btnRefresh.addEventListener('click', () => {
-      // Ajoutez ici la logique pour rafraîchir les scores
+    btnRefresh.addEventListener('click', async () => {
+      try {
+        const gameId = 'YOUR_GAME_ID'; // Replace this with the actual game ID you received from the API when creating the game
+        await this.updateScores(gameId);
+      } catch (error) {
+        throw new Error('Failed to fetch scores:', error);
+      }
     });
     return btnRefresh;
   }
@@ -69,7 +116,7 @@ class LeaderboardApp {
     const right = document.createElement('div');
     right.classList.add('right');
 
-    const div2 = this.createSectionWithTitle('Add your score'); // Utilisation correcte de 'this'
+    const div2 = this.createSectionWithTitle('Add your score');
     const form = this.createScoreForm();
     div2.appendChild(form);
 
@@ -77,6 +124,7 @@ class LeaderboardApp {
     return right;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   createSectionWithTitle(titleText) {
     const div = document.createElement('div');
     div.classList.add('title');
@@ -86,33 +134,36 @@ class LeaderboardApp {
     return div;
   }
 
-  createScoreTable() {
-    const table = document.createElement('table');
-    table.classList.add('scoreTable'); // Ajouter la classe "scoreTable" pour la bordure
-    const tr = document.createElement('tr');
-    const th = this.createTableHeader('Name'); // Utilisation correcte de 'this'
-    tr.appendChild(th);
-    table.appendChild(tr);
-    return table;
-  }
-
-  createTableHeader(text) {
-    const th = document.createElement('th');
-    th.textContent = text;
-    return th;
-  }
-
   createScoreForm() {
     const form = document.createElement('form');
-    const input1 = this.createInput('text', 'name', 'Your Name'); // Utilisation correcte de 'this'
-    const input2 = this.createInput('text', 'score', 'Your Score'); // Utilisation correcte de 'this'
-    const btnSubmit = this.createInput('submit', '', 'Submit'); // Utilisation correcte de 'this'
+
+    const input1 = this.createInput('text', 'name', 'Your Name');
+    const input2 = this.createInput('text', 'score', 'Your Score');
+    const btnSubmit = this.createInput('submit', '', 'Submit');
+
     form.appendChild(input1);
     form.appendChild(input2);
     form.appendChild(btnSubmit);
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const userName = input1.value;
+      const score = input2.value;
+
+      try {
+        const gameId = 'YOUR_GAME_ID'; // Replace this with the actual game ID you received from the API when creating the game
+        await this.submitScore(gameId, userName, score);
+        await this.updateScores(gameId);
+      } catch (error) {
+        throw new Error('Error submitting score:', error);
+      }
+    });
+
     return form;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   createInput(type, name, placeholder) {
     const input = document.createElement('input');
     input.type = type;
@@ -120,10 +171,37 @@ class LeaderboardApp {
     if (placeholder) input.placeholder = placeholder;
     return input;
   }
+
+  // eslint-disable-next-line class-methods-use-this
+  async submitScore(gameId, userName, score) {
+    const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores/`;
+
+    const data = {
+      user: userName,
+      score: Number(score),
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit score.');
+      }
+
+      return response.json();
+    } catch (error) {
+      throw new Error('Error submitting score:', error);
+    }
+  }
 }
 
 const app = new LeaderboardApp();
 window.addEventListener('DOMContentLoaded', () => {
-  // Utilisation de l'instance déjà créée
   app.launcher();
 });
