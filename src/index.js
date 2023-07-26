@@ -131,14 +131,89 @@ class LeaderboardApp {
     return th;
   }
 
-  createScoreForm() {
+  //we will add a new method submitScore which will send a POST request to the API to save the score
+  async submitScore(gameId, userName, score) {
+    const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores/`;
+
+    const data = {
+      user: userName,
+      score: Number(score), // convert the score into number
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit score.');
+      }
+
+      // Update the list of scores after sending the score
+      await this.updateScores(gameId);
+      return response.json();
+    } catch (error) {
+      throw new Error('Failed to submit score.');
+    }
+  }
+
+  async updateScores(gameId) {
+    const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores/`;
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+
+      // Update the list of scores on the page
+      const ul = document.querySelector('.nameList');
+      ul.innerHTML = ''; // Clear the current list to update it
+
+      data.result.forEach((score, index) => {
+        const li = document.createElement('li');
+        li.textContent = `Name: ${score.user}, Score: ${score.score}`;
+        li.style.backgroundColor = index % 2 === 0 ? 'white' : 'silver'; // Alternate white and silver backgrounds
+        ul.appendChild(li);
+      });
+    } catch (error) {
+      console.error('Failed to update scores:', error);
+    }
+  }
+
+  // Modify createScoreForm method to call submitScore on form submission
+  createScoreForm(gameId) {
     const form = document.createElement('form');
-    const input1 = this.createInput('text', 'name', 'Your Name'); // Utilisation correcte de 'this'
-    const input2 = this.createInput('text', 'score', 'Your Score'); // Utilisation correcte de 'this'
-    const btnSubmit = this.createInput('submit', '', 'Submit'); // Utilisation correcte de 'this'
+
+    const input1 = this.createInput('text', 'name', 'Your Name'); 
+    const input2 = this.createInput('text', 'score', 'Your Score');
+    const btnSubmit = this.createInput('submit', '', 'Submit');
+
     form.appendChild(input1);
     form.appendChild(input2);
     form.appendChild(btnSubmit);
+
+    // Add a submit event to the form
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      // Retrieve form values
+      const userName = input1.value;
+      const score = input2.value;
+
+    try {
+      // Call the submitScore method to save the score to the API
+      const result = await this.submitScore(gameId, userName, score);
+
+      // Display result of score submission (e.g. display success message)
+      console.log(result);
+    } catch (error) {
+      console.error('Error submitting score:', error);
+    }
+    });
+
     return form;
   }
 
