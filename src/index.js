@@ -56,29 +56,37 @@ class LeaderboardApp {
     return left;
   }
 
-  createRefreshButton() {
+  async getScores(gameId) {
+    try {
+      const response = await fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores/`);
+      const data = await response.json();
+      return data.result;
+    } catch (error) {
+      return [];
+    }
+  }
+
+  // Modify the createRefreshButton method to call getScores and display the scores
+  createRefreshButton(gameId) {
     const btnRefresh = document.createElement('button');
     btnRefresh.textContent = 'Refresh';
     btnRefresh.addEventListener('click', async () => {
       try {
-        // POST Request for creating un new game
-        const gameData = {
-          name: 'Ghost',
-        };
+        // Call the getScores method to retrieve game scores
+        const scores = await this.getScores(gameId);
 
-        const response = await fetch('https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/', {
-          method: 'POST',
-          headers: {
-            'content-Type': 'application/json',
-          },
-          body: JSON.stringify(gameData),
-        });
-
-        const data = await response.json();
-
-        //save the ID of the game returned by API
-        const gameId = data.result.substring(data.result.lastIndexOf(':') + 2);
-        
+        // Now we can display the fetched scores on the page
+      // for example, updating the list of names with the scores retrieved.
+      // (Note that for now we are only displaying the names, you will also need to
+      // display the scores in the list.)
+      const nameList = document.querySelector('.nameList');
+      nameList.innerHTML = '';
+      scores.forEach((score, index) => {
+        const li = document.createElement('li');
+        li.textContent = `Name: ${score.user} - Score: ${score.score}`;
+        li.style.backgroundColor = index % 2 === 0 ? 'white' : 'silver';
+        nameList.appendChild(li);
+      });
       } catch (error) {
         console.error('Error while creating the game :', error);
       }
