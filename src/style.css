@@ -8,7 +8,7 @@ body {
 .main {
   width: 1000px;
   margin: 0 auto;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   display: flex;
   flex-wrap: wrap;
 }
@@ -18,7 +18,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid silver;
   padding: 10px;
 }
 
@@ -42,7 +41,9 @@ body {
 }
 
 .left .title button {
-  height: 40px;
+  height: 25px;
+  border: none;
+  cursor: pointer;
 }
 
 .scoreTable {
@@ -81,11 +82,15 @@ form input {
   height: 25px;
   font-size: 12pt;
   margin-bottom: 15px;
-  border-radius: 9px;
+  border: none;
+  border-bottom: 1px solid silver;
 }
 
 form input[type='submit'] {
-  width: 200px;
+  border-bottom: none;
+  border-radius: 10px;
+  width: 20%;
+  cursor: pointer;
 }
 
 .nameList {
