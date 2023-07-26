@@ -22,6 +22,7 @@ class LeaderboardApp {
     this.body.appendChild(main);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   createHeader() {
     const header = document.createElement('div');
     header.classList.add('header');
@@ -56,6 +57,7 @@ class LeaderboardApp {
     return left;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async getScores(gameId) {
     try {
       const response = await fetch(`https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores/`);
@@ -76,19 +78,19 @@ class LeaderboardApp {
         const scores = await this.getScores(gameId);
 
         // Now we can display the fetched scores on the page
-      // for example, updating the list of names with the scores retrieved.
-      // (Note that for now we are only displaying the names, you will also need to
-      // display the scores in the list.)
-      const nameList = document.querySelector('.nameList');
-      nameList.innerHTML = '';
-      scores.forEach((score, index) => {
-        const li = document.createElement('li');
-        li.textContent = `Name: ${score.user} - Score: ${score.score}`;
-        li.style.backgroundColor = index % 2 === 0 ? 'white' : 'silver';
-        nameList.appendChild(li);
-      });
+        // for example, updating the list of names with the scores retrieved.
+        // (Note that for now we are only displaying the names, you will also need to
+        // display the scores in the list.)
+        const nameList = document.querySelector('.nameList');
+        nameList.innerHTML = '';
+        scores.forEach((score, index) => {
+          const li = document.createElement('li');
+          li.textContent = `Name: ${score.user} - Score: ${score.score}`;
+          li.style.backgroundColor = index % 2 === 0 ? 'white' : 'silver';
+          nameList.appendChild(li);
+        });
       } catch (error) {
-        console.error('Error while creating the game :', error);
+        throw new Error('Error while creating the game :', error);
       }
     });
     return btnRefresh;
@@ -106,6 +108,7 @@ class LeaderboardApp {
     return right;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   createSectionWithTitle(titleText) {
     const div = document.createElement('div');
     div.classList.add('title');
@@ -125,13 +128,14 @@ class LeaderboardApp {
     return table;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   createTableHeader(text) {
     const th = document.createElement('th');
     th.textContent = text;
     return th;
   }
 
-  //we will add a new method submitScore which will send a POST request to the API to save the score
+  // we will add a new method submitScore which will send POST request to the API to save the score
   async submitScore(gameId, userName, score) {
     const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores/`;
 
@@ -161,6 +165,7 @@ class LeaderboardApp {
     }
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async updateScores(gameId) {
     const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores/`;
 
@@ -179,7 +184,7 @@ class LeaderboardApp {
         ul.appendChild(li);
       });
     } catch (error) {
-      console.error('Failed to update scores:', error);
+      throw new Error('Failed to update scores:', error);
     }
   }
 
@@ -187,7 +192,7 @@ class LeaderboardApp {
   createScoreForm(gameId) {
     const form = document.createElement('form');
 
-    const input1 = this.createInput('text', 'name', 'Your Name'); 
+    const input1 = this.createInput('text', 'name', 'Your Name');
     const input2 = this.createInput('text', 'score', 'Your Score');
     const btnSubmit = this.createInput('submit', '', 'Submit');
 
@@ -203,20 +208,18 @@ class LeaderboardApp {
       const userName = input1.value;
       const score = input2.value;
 
-    try {
+      try {
       // Call the submitScore method to save the score to the API
-      const result = await this.submitScore(gameId, userName, score);
-
-      // Display result of score submission (e.g. display success message)
-      console.log(result);
-    } catch (error) {
-      console.error('Error submitting score:', error);
-    }
+        await this.submitScore(gameId, userName, score);
+      } catch (error) {
+        throw new Error('Error submitting score:', error);
+      }
     });
 
     return form;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   createInput(type, name, placeholder) {
     const input = document.createElement('input');
     input.type = type;
