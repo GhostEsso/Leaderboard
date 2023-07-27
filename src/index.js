@@ -33,6 +33,8 @@ class LeaderboardApp {
     return header;
   }
 
+  // Get game scores from API
+  // gameId: the game ID
   // eslint-disable-next-line class-methods-use-this
   async getScores(gameId) {
     try {
@@ -56,7 +58,7 @@ class LeaderboardApp {
     const ul = document.createElement('ul');
     ul.classList.add('nameList');
 
-    const names = ['Name: 100', 'Name: 50', 'Name: 20', 'Name: 40'];
+    const names = [];
 
     if (names.length > 0) {
       names.forEach((name, index) => {
@@ -66,7 +68,7 @@ class LeaderboardApp {
         ul.appendChild(li);
       });
     } else {
-      ul.style.border = 'none';
+      ul.classList.add('noBorder');
     }
 
     left.appendChild(ul);
@@ -74,6 +76,8 @@ class LeaderboardApp {
     return left;
   }
 
+  // Update the scores displayed in the list on the left
+  // gameId: the game ID
   // eslint-disable-next-line class-methods-use-this
   async updateScores(gameId) {
     const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores/`;
@@ -98,6 +102,7 @@ class LeaderboardApp {
     }
   }
 
+  // Create and return the "Refresh" button
   createRefreshButton() {
     const btnRefresh = document.createElement('button');
     btnRefresh.textContent = 'Refresh';
@@ -140,6 +145,7 @@ class LeaderboardApp {
     const input1 = this.createInput('text', 'name', 'Your Name');
     const input2 = this.createInput('text', 'score', 'Your Score');
     const btnSubmit = this.createInput('submit', '', 'Submit');
+    btnSubmit.value = 'Submit';
 
     form.appendChild(input1);
     form.appendChild(input2);
@@ -172,6 +178,10 @@ class LeaderboardApp {
     return input;
   }
 
+  // Send the submitted score to the API
+  // gameId: the game ID
+  // userName: the name of the user
+  // score: the submitted score
   // eslint-disable-next-line class-methods-use-this
   async submitScore(gameId, userName, score) {
     const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameId}/scores/`;
