@@ -1,7 +1,7 @@
 /* style.css */
 
 body {
-  background-color: rgba(18, 216, 223, 0.432);
+  background-color: rgba(178, 234, 236, 0.432);
   box-sizing: border-box;
 }
 
@@ -18,7 +18,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid silver;
   padding: 10px;
 }
 
@@ -42,7 +41,9 @@ body {
 }
 
 .left .title button {
-  height: 40px;
+  height: 25px;
+  width: 80px;
+  cursor: pointer;
 }
 
 .scoreTable {
@@ -81,21 +82,28 @@ form input {
   height: 25px;
   font-size: 12pt;
   margin-bottom: 15px;
-  border-radius: 9px;
+  border: none;
+  border-bottom: 1px solid black;
 }
 
 form input[type='submit'] {
-  width: 200px;
+  width: 100px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .nameList {
-  border: 2px solid rgb(0, 0, 0);  /* Ajouter une bordure à la liste des noms
   padding: 0; /* Supprimer les marges internes de la liste pour éliminer les puces */
   list-style: none; /* Supprimer les puces de la liste */
 }
 
 .noBorder {
   border: none;
+}
+
+.Border {
+  border: 2px solid black;
 }
 
 .footer {
