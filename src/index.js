@@ -89,7 +89,8 @@ class LeaderboardApp {
       ul.innerHTML = '';
 
       if (data.result && data.result.length > 0) {
-        data.result.forEach((score, index) => {
+        const sortedScores = data.result.sort((a, b) => b.score - a.score);
+        sortedScores.forEach((score, index) => {
           const li = document.createElement('li');
           li.textContent = `Name: ${score.user}, Score: ${score.score}`;
           li.style.backgroundColor = index % 2 === 0 ? 'white' : 'silver';

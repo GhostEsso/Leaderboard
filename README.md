@@ -56,7 +56,13 @@
 
 ## 💻 Getting Started <a name="getting-started"></a>
 
-To get a local copy up and running, follow these steps.
+Obtaining API Keys: Explain which APIs the application consumes and direct users to the respective API documentation or websites where they can register for an API key. Provide clear steps on how to sign up, obtain the key, and ensure they understand any limitations or restrictions.
+
+Securing API Keys: Emphasize the importance of securing API keys to prevent unauthorized access. Provide guidelines on storing these keys securely, such as using environment variables or configuration files outside the version control system.
+
+Integration into the App: Walk users through the process of integrating the obtained API key into the application. This may involve adding the key to a configuration file or using a specific method to access it during runtime.
+
+API Usage: Include examples or code snippets that demonstrate how to make API requests using the keys. This will help users understand the syntax and usage of the APIs in the context of the application.
 
 ### Prerequisites
 
