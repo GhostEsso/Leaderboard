@@ -6,7 +6,8 @@ body {
 }
 
 .main {
-  width: 1000px;
+  width: 100%;
+  max-width: 1000px;
   margin: 0 auto;
   background-color: #b2bcaa;
   display: flex;
@@ -116,7 +117,15 @@ form input[type='submit'] {
   border: 2px solid black;
 }
 
-.footer {
-  background-color: rgba(43, 129, 96, 0.699);
-  flex: 100%;
+/* Media queries pour les petits écrans */
+@media screen and (max-width: 768px) {
+  .main {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .left,
+  .right {
+    flex: 100%;
+  }
 }
