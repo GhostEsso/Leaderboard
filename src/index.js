@@ -141,8 +141,8 @@ class LeaderboardApp {
   createScoreForm() {
     const form = document.createElement('form');
 
-    const input1 = this.createInput('text', 'name', 'Your Name');
-    const input2 = this.createInput('text', 'score', 'Your Score');
+    const input1 = this.createInput('text', 'name', 'John Doe');
+    const input2 = this.createInput('text', 'score', '90');
     const btnSubmit = this.createInput('submit', '', 'Submit');
     btnSubmit.value = 'Submit';
 

@@ -1,16 +1,24 @@
 /* style.css */
 
 body {
-  background-color: rgba(178, 234, 236, 0.432);
+  background-color: #b2bcaa;
   box-sizing: border-box;
 }
 
 .main {
   width: 1000px;
   margin: 0 auto;
-  background-color: white;
+  background-color: #b2bcaa;
   display: flex;
   flex-wrap: wrap;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+h2 {
+  font-size: 40px;
 }
 
 .header {
@@ -84,6 +92,8 @@ form input {
   margin-bottom: 15px;
   border: none;
   border-bottom: 1px solid black;
+  background: #c9cebd;
+  color: white;
 }
 
 form input[type='submit'] {
