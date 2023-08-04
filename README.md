@@ -11,6 +11,7 @@
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
+    - [🚀 Live Demo ](#-live-demo-)
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
@@ -53,6 +54,11 @@
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- LIVE DEMO -->
+
+## 🚀 Live Demo <a name="live-demo"></a>
+
+- [Link](https://ghostesso.github.io/Leaderboard/dist/)
 
 ## 💻 Getting Started <a name="getting-started"></a>
 
@@ -75,20 +81,18 @@ In order to run this project you need:
 
 Clone this repository to your desired folder:
 
-
 ### Install
 
 Install this project with:
-
 
 ### Usage
 
 To run the project, execute the following command:
 
-
 ### Run tests
 
 To run tests, run the following command:
+
 - npx hint .
 
 ### Author
